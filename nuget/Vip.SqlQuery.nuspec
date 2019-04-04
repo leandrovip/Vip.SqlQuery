@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Vip.SqlQuery</id>
+    <version>1.0.0</version>
+    <authors>Leandro Ferreira</authors>
+    <owners>Leandro Ferreira</owners>
+    <projectUrl>https://github.com/leandrovip/Vip.SqlQuery</projectUrl>
+    <!-- <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl> -->
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Simple library for generate sql queries to MS SQL SERVER</description>
+    <releaseNotes>First release.</releaseNotes>
+    <copyright>Copyright 2019</copyright>
+    <tags>sql-builder query sql-server vip querybuilder</tags>
+  </metadata>
+    <files>
+        <file src="..\src\Vip.SqlQuery\bin\Release\Vip.SqlQuery.dll" target="lib\net462\Vip.SqlQuery.dll"/>
+    </files>
+</package>
