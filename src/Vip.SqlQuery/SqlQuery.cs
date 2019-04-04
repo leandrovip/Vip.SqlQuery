@@ -41,8 +41,8 @@ namespace Vip.SqlQuery
             {
                 _selectList.CompileSelects(),
                 _fromClause.CompileFrom(),
-                _whereList.CompileWheres(),
                 _joinList.CompileJoins(),
+                _whereList.CompileWheres(),
                 _orderByList.CompileOrderBy()
             };
 
