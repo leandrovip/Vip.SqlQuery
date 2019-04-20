@@ -125,5 +125,38 @@ namespace Vip.SqlQuery.Tests.Clauses
             // Assert
             Assert.Equal(queryExpected, query.Command);
         }
+
+        [Fact]
+        public void Select_With_Alias_Only_One_Column()
+        {
+            // Arrange
+            var queryExpected = "SELECT [p].[ProdutoId] AS Codigo_Produto FROM [Produtos] [p]";
+
+            // Act
+            var query = SqlQuery.New()
+                .Select("p.ProdutoId as Codigo_Produto")
+                .From("Produtos p")
+                .Build();
+
+            // Assert
+            Assert.Equal(queryExpected, query.Command);
+        }
+
+        [Fact]
+        public void Select_With_All_Methods()
+        {
+            // Arrange
+            var queryExpected =
+                "SELECT [p].[ProdutoId], [p].[Codigo] AS Codigo_Barras, [p].[Descricao] FROM [Produtos] [p]";
+
+            // Act
+            var query = SqlQuery.New()
+                .Select(new[] {"ProdutoId", "Codigo as Codigo_Barras", "Descricao"}, "p")
+                .From("Produtos p")
+                .Build();
+
+            // Assert
+            Assert.Equal(queryExpected, query.Command);
+        }
     }
 }

@@ -22,12 +22,11 @@ namespace Vip.SqlQuery.Utils
             if (column.Contains(" AS "))
             {
                 var arrayColumn = column.Split(' ');
-                nameColumn = $"[{arrayColumn[0]}] AS {arrayColumn[2]}";
+                nameColumn = $"{AjustWithDot(arrayColumn[0])} AS {arrayColumn[2]}";
             }
             else if (column.Contains("."))
             {
-                var values = column.Split('.');
-                nameColumn = values.Length > 1 ? $"[{values[0]}].[{values[1]}]" : $"[{values[0]}]";
+                nameColumn = AjustWithDot(column);
             }
             else
             {
@@ -35,6 +34,14 @@ namespace Vip.SqlQuery.Utils
             }
 
             return nameColumn;
+        }
+
+        private static string AjustWithDot(string column)
+        {
+            if (!column.Contains(".")) return $"[{column}]";
+
+            var values = column.Split('.');
+            return values.Length > 1 ? $"[{values[0]}].[{values[1]}]" : $"[{values[0]}]";
         }
 
         private static string AjustPrefixAlias(string column)
