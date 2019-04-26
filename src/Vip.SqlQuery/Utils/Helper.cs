@@ -1,9 +1,13 @@
-﻿using Vip.SqlQuery.Extensions;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Vip.SqlQuery.Extensions;
 
 namespace Vip.SqlQuery.Utils
 {
     public class Helper
     {
+        private static readonly List<string> _functions = new List<string> {"COUNT", "AVG", "DISTINCT"};
+
         public static string TableName(string table)
         {
             if (table.IsNullOrEmpty())
@@ -16,17 +20,22 @@ namespace Vip.SqlQuery.Utils
 
         public static string ColumnName(string column)
         {
+            return _functions.Any(column.Contains) ? BuildFunctions(column) : BuildColumnName(column);
+        }
+
+        private static string BuildColumnName(string column)
+        {
             string nameColumn;
 
-            column = AjustPrefixAlias(column);
+            column = BuildPrefixAlias(column);
             if (column.Contains(" AS "))
             {
                 var arrayColumn = column.Split(' ');
-                nameColumn = $"{AjustWithDot(arrayColumn[0])} AS {arrayColumn[2]}";
+                nameColumn = $"{BuildColumnDot(arrayColumn[0])} AS {arrayColumn[2]}";
             }
             else if (column.Contains("."))
             {
-                nameColumn = AjustWithDot(column);
+                nameColumn = BuildColumnDot(column);
             }
             else
             {
@@ -36,7 +45,12 @@ namespace Vip.SqlQuery.Utils
             return nameColumn;
         }
 
-        private static string AjustWithDot(string column)
+        private static string BuildFunctions(string function)
+        {
+            return BuildPrefixAlias(function);
+        }
+
+        private static string BuildColumnDot(string column)
         {
             if (!column.Contains(".")) return $"[{column}]";
 
@@ -44,7 +58,7 @@ namespace Vip.SqlQuery.Utils
             return values.Length > 1 ? $"[{values[0]}].[{values[1]}]" : $"[{values[0]}]";
         }
 
-        private static string AjustPrefixAlias(string column)
+        private static string BuildPrefixAlias(string column)
         {
             return column.Trim().Replace(" as ", " AS ").Replace(" As ", " AS ").Replace(" aS ", " AS ");
         }

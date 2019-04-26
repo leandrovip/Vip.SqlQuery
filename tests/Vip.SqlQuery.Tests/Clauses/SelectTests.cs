@@ -130,7 +130,7 @@ namespace Vip.SqlQuery.Tests.Clauses
         public void Select_With_Alias_Only_One_Column()
         {
             // Arrange
-            var queryExpected = "SELECT [p].[ProdutoId] AS Codigo_Produto FROM [Produtos] [p]";
+            const string queryExpected = "SELECT [p].[ProdutoId] AS Codigo_Produto FROM [Produtos] [p]";
 
             // Act
             var query = SqlQuery.New()
@@ -146,13 +146,46 @@ namespace Vip.SqlQuery.Tests.Clauses
         public void Select_With_All_Methods()
         {
             // Arrange
-            var queryExpected =
+            const string queryExpected =
                 "SELECT [p].[ProdutoId], [p].[Codigo] AS Codigo_Barras, [p].[Descricao] FROM [Produtos] [p]";
 
             // Act
             var query = SqlQuery.New()
                 .Select(new[] {"ProdutoId", "Codigo as Codigo_Barras", "Descricao"}, "p")
                 .From("Produtos p")
+                .Build();
+
+            // Assert
+            Assert.Equal(queryExpected, query.Command);
+        }
+
+        [Fact]
+        public void Select_With_Count()
+        {
+            // Arrange
+            const string queryExpected = "SELECT COUNT(*) AS Registros FROM [Produtos]";
+
+            // Act
+            var query = SqlQuery.New()
+                .Select("COUNT(*) as Registros")
+                .From("Produtos")
+                .Build();
+
+            // Assert
+            Assert.Equal(queryExpected, query.Command);
+        }
+
+        [Fact]
+        public void Select_With_Count_And_Column()
+        {
+            // Arrange
+            const string queryExpected = "SELECT COUNT(*) AS Registros, [ProdutoId] FROM [Produtos]";
+
+            // Act
+            var query = SqlQuery.New()
+                .Select("COUNT(*) as Registros")
+                .Select("ProdutoId")
+                .From("Produtos")
                 .Build();
 
             // Assert

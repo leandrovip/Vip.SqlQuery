@@ -9,7 +9,12 @@ namespace Vip.SqlQuery.Extensions
         public static string CompileSelects(this IEnumerable<SelectClause> list)
         {
             var select = string.Join(", ", list.Select(x => x.Column).ToList());
-            return !select.IsNullOrEmpty() ? $"SELECT {select}" : "";
+            return !select.IsNullOrEmpty() ? $"{select}" : "";
+        }
+
+        public static string CompileLimit(this LimitClause limit)
+        {
+            return limit != null ? $"TOP {limit.LimitCommand}" : "";
         }
 
         public static string CompileFrom(this FromClause from)

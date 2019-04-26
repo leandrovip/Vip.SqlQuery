@@ -37,6 +37,7 @@
   <ItemGroup>
     <Compile Include="Clause\FromClause.cs" />
     <Compile Include="Clause\JoinClause.cs" />
+    <Compile Include="Clause\LimitClause.cs" />
     <Compile Include="Clause\OrderByClause.cs" />
     <Compile Include="Extensions\CompileExtensions.cs" />
     <Compile Include="SqlQuery.From.cs" />
@@ -56,6 +57,9 @@
     <Compile Include="SqlResult.cs" />
     <Compile Include="SqlQuery.cs" />
     <Compile Include="Utils\Parameter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="SqlQuery.Limit.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

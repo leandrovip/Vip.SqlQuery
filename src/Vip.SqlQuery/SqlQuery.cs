@@ -14,6 +14,7 @@ namespace Vip.SqlQuery
         private readonly List<JoinClause> _joinList;
         private readonly List<OrderByClause> _orderByList;
         private FromClause _fromClause;
+        private LimitClause _limitClause;
 
         private int parameterNumber;
 
@@ -39,6 +40,8 @@ namespace Vip.SqlQuery
         {
             var results = new[]
             {
+                "SELECT",
+                _limitClause.CompileLimit(),
                 _selectList.CompileSelects(),
                 _fromClause.CompileFrom(),
                 _joinList.CompileJoins(),
