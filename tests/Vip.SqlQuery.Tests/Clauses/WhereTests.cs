@@ -186,5 +186,119 @@ namespace Vip.SqlQuery.Tests.Clauses
             Assert.Equal(queryExpected, query.Command);
             Assert.Equal(3, query.Parameters.Length);
         }
+
+        [Fact]
+        public void Where_With_Condition_true()
+        {
+            // Arrange
+            const string queryExpected = "SELECT [p].[ProdutoId] FROM [Produto] [p] WHERE [p].[ProdutoId] = @p0";
+
+            // Act
+            var query = SqlQuery.New()
+                .Select("p.ProdutoId")
+                .From("Produto p")
+                .Where(true, "p.ProdutoId", Condition.Equal, 1)
+                .Build();
+
+            // Assert
+            Assert.Equal(queryExpected, query.Command);
+        }
+
+        [Fact]
+        public void Where_With_Condition_false()
+        {
+            // Arrange
+            const string queryExpected = "SELECT [p].[ProdutoId] FROM [Produto] [p]";
+
+            // Act
+            var query = SqlQuery.New()
+                .Select("p.ProdutoId")
+                .From("Produto p")
+                .Where(false, "p.ProdutoId", Condition.Equal, 1)
+                .Build();
+
+            // Assert
+            Assert.Equal(queryExpected, query.Command);
+        }
+
+        [Fact]
+        public void Where_With_WhereAnd_Condition_true()
+        {
+            // Arrange
+            const string queryExpected = "SELECT [p].[ProdutoId] " +
+                                         "FROM [Produto] [p] " +
+                                         "WHERE [p].[ProdutoId] = @p0 AND [p].[Descricao] LIKE @p1";
+
+            // Act
+            var query = SqlQuery.New()
+                .Select("p.ProdutoId")
+                .From("Produto p")
+                .Where("p.ProdutoId", Condition.Equal, 1)
+                .WhereAnd(true, "p.Descricao", Condition.Like, "Descricao")
+                .Build();
+
+            // Assert
+            Assert.Equal(queryExpected, query.Command);
+        }
+
+        [Fact]
+        public void Where_With_WhereAnd_Condition_false()
+        {
+            // Arrange
+            const string queryExpected = "SELECT [p].[ProdutoId] " +
+                                         "FROM [Produto] [p] " +
+                                         "WHERE [p].[ProdutoId] = @p0";
+
+            // Act
+            var query = SqlQuery.New()
+                .Select("p.ProdutoId")
+                .From("Produto p")
+                .Where("p.ProdutoId", Condition.Equal, 1)
+                .WhereAnd(false, "p.Descricao", Condition.Like, "Descricao")
+                .Build();
+
+            // Assert
+            Assert.Equal(queryExpected, query.Command);
+        }
+
+        [Fact]
+        public void Where_With_WhereOr_Condition_true()
+        {
+            // Arrange
+            const string queryExpected = "SELECT [p].[ProdutoId] " +
+                                         "FROM [Produto] [p] " +
+                                         "WHERE [p].[ProdutoId] = @p0 OR [p].[Descricao] LIKE @p1";
+
+            // Act
+            var query = SqlQuery.New()
+                .Select("p.ProdutoId")
+                .From("Produto p")
+                .Where("p.ProdutoId", Condition.Equal, 1)
+                .WhereOr(true, "p.Descricao", Condition.Like, "Descricao")
+                .Build();
+
+            // Assert
+            Assert.Equal(queryExpected, query.Command);
+        }
+
+        [Fact]
+        public void Where_With_WhereOr_Condition_false()
+        {
+            // Arrange
+            const string queryExpected = "SELECT [p].[ProdutoId] " +
+                                         "FROM [Produto] [p] " +
+                                         "WHERE [p].[ProdutoId] = @p0";
+
+            // Act
+            var query = SqlQuery.New()
+                .Select("p.ProdutoId")
+                .From("Produto p")
+                .Where("p.ProdutoId", Condition.Equal, 1)
+                .WhereOr(false, "p.Descricao", Condition.Like, "Descricao")
+                .Build();
+
+            // Assert
+            Assert.Equal(queryExpected, query.Command);
+        }
     }
 }

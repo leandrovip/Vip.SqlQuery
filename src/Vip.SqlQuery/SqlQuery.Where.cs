@@ -14,6 +14,17 @@ namespace Vip.SqlQuery
             return this;
         }
 
+        public SqlQuery Where(bool predicate, string column, Condition condition, object value)
+        {
+            if (predicate)
+            {
+                _whereList.Add(new WhereClause(column, condition, value, LogicOperator.NULL, parameterNumber));
+                parameterNumber++;
+            }
+
+            return this;
+        }
+
         public SqlQuery Where(Where[] multiple)
         {
             _whereList.Add(new WhereClause(multiple, LogicOperator.NULL, parameterNumber));
@@ -32,6 +43,17 @@ namespace Vip.SqlQuery
             return this;
         }
 
+        public SqlQuery WhereAnd(bool predicate, string column, Condition condition, object value)
+        {
+            if (predicate)
+            {
+                _whereList.Add(new WhereClause(column, condition, value, LogicOperator.AND, parameterNumber));
+                parameterNumber++;
+            }
+
+            return this;
+        }
+
         public SqlQuery WhereAnd(Where[] multiple)
         {
             _whereList.Add(new WhereClause(multiple, LogicOperator.AND, parameterNumber));
@@ -47,6 +69,17 @@ namespace Vip.SqlQuery
         {
             _whereList.Add(new WhereClause(column, condition, value, LogicOperator.OR, parameterNumber));
             parameterNumber++;
+            return this;
+        }
+
+        public SqlQuery WhereOr(bool predicate, string column, Condition condition, object value)
+        {
+            if (predicate)
+            {
+                _whereList.Add(new WhereClause(column, condition, value, LogicOperator.OR, parameterNumber));
+                parameterNumber++;
+            }
+
             return this;
         }
 
