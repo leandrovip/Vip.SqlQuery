@@ -28,6 +28,11 @@ namespace Vip.SqlQuery.Clause
             CreateCommand(wheres, logicOperator, parameterNumber);
         }
 
+        public WhereClause(string column, object value1, object value2, int parameterNumber) : this()
+        {
+            CreateCommand(column, value1, value2, parameterNumber);
+        }
+
         private WhereClause()
         {
             Parameter = new List<Parameter>();
@@ -61,6 +66,17 @@ namespace Vip.SqlQuery.Clause
             }
 
             WhereCondition = command + ")";
+        }
+
+        private void CreateCommand(string column, object value1, object value2, int parameterNumber)
+        {
+            var columnName = Helper.ColumnName(column);
+            var parameterName1 = $"@p{parameterNumber}";
+            var parameterName2 = $"@p{parameterNumber + 1}";
+
+            WhereCondition = $"{columnName} BETWEEN {parameterName1} AND {parameterName2}";
+            Parameter.Add(new Parameter {Name = parameterName1, Value = value1});
+            Parameter.Add(new Parameter {Name = parameterName2, Value = value2});
         }
 
         #endregion

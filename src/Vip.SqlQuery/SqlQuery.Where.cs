@@ -91,5 +91,16 @@ namespace Vip.SqlQuery
         }
 
         #endregion
+
+        #region WhereBetween
+
+        public SqlQuery WhereBetween(string column, object value1, object value2)
+        {
+            _whereList.Add(new WhereClause(column, value1, value2, parameterNumber));
+            parameterNumber = +2;
+            return this;
+        }
+
+        #endregion
     }
 }

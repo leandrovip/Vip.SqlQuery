@@ -300,5 +300,65 @@ namespace Vip.SqlQuery.Tests.Clauses
             // Assert
             Assert.Equal(queryExpected, query.Command);
         }
+
+        [Fact]
+        public void Where_With_Between()
+        {
+            // Arrange
+            const string queryExpected = "SELECT [p].[ProdutoId], [p].[Descricao] " +
+                                         "FROM [Produto] [p] " +
+                                         "WHERE [p].[DataCadastro] BETWEEN @p0 AND @p1";
+
+            // Act
+            var query = SqlQuery.New()
+                .Select(columnsTest, "p")
+                .From("Produto p")
+                .WhereBetween("p.DataCadastro", "01/01/2001", "30/01/2001")
+                .Build();
+
+            // Assert
+            Assert.Equal(queryExpected, query.Command);
+            Assert.Equal(2, query.Parameters.Length);
+        }
+
+        [Fact]
+        public void Where_With_WhereBetween_And_WhereAnd()
+        {
+            const string queryExpected = "SELECT [p].[ProdutoId], [p].[Descricao] " +
+                                         "FROM [Produto] [p] " +
+                                         "WHERE [p].[DataCadastro] BETWEEN @p0 AND @p1 " +
+                                         "AND [p].[ProdutoId] = @p2";
+
+            // Act
+            var query = SqlQuery.New()
+                .Select(columnsTest, "p")
+                .From("Produto p")
+                .WhereBetween("p.DataCadastro", "01/01/2001", "30/01/2001")
+                .WhereAnd("p.ProdutoId", Condition.Equal, "1")
+                .Build();
+
+            // Assert
+            Assert.Equal(queryExpected, query.Command);
+        }
+
+        [Fact]
+        public void Where_With_WhereBetween_And_OrderBy()
+        {
+            const string queryExpected = "SELECT [p].[ProdutoId], [p].[Descricao] " +
+                                         "FROM [Produto] [p] " +
+                                         "WHERE [p].[DataCadastro] BETWEEN @p0 AND @p1 " +
+                                         "ORDER BY [p].[Descricao]";
+
+            // Act
+            var query = SqlQuery.New()
+                .Select(columnsTest, "p")
+                .From("Produto p")
+                .WhereBetween("p.DataCadastro", "01/01/2001", "30/01/2001")
+                .OrderBy("p.Descricao")
+                .Build();
+
+            // Assert
+            Assert.Equal(queryExpected, query.Command);
+        }
     }
 }
