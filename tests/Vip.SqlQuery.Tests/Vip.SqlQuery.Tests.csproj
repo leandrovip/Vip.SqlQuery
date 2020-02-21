@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clauses\FromTests.cs" />
+    <Compile Include="Clauses\GroupByTests.cs" />
     <Compile Include="Clauses\JoinTests.cs" />
     <Compile Include="Clauses\LimitTests.cs" />
     <Compile Include="Clauses\OrderByTests.cs" />

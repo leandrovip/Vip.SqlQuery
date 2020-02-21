@@ -36,11 +36,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clause\FromClause.cs" />
+    <Compile Include="Clause\GroupByClause.cs" />
     <Compile Include="Clause\JoinClause.cs" />
     <Compile Include="Clause\LimitClause.cs" />
     <Compile Include="Clause\OrderByClause.cs" />
     <Compile Include="Extensions\CompileExtensions.cs" />
     <Compile Include="SqlQuery.From.cs" />
+    <Compile Include="SqlQuery.GroupBy.cs" />
     <Compile Include="SqlQuery.Join.cs" />
     <Compile Include="SqlQuery.OrderBy.cs" />
     <Compile Include="SqlQuery.Select.cs" />

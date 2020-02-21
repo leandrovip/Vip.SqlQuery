@@ -12,6 +12,7 @@ namespace Vip.SqlQuery
         private readonly List<SelectClause> _selectList;
         private readonly List<WhereClause> _whereList;
         private readonly List<JoinClause> _joinList;
+        private readonly List<GroupByClause> _groupByList;
         private readonly List<OrderByClause> _orderByList;
         private FromClause _fromClause;
         private LimitClause _limitClause;
@@ -27,6 +28,7 @@ namespace Vip.SqlQuery
             _selectList = new List<SelectClause>();
             _whereList = new List<WhereClause>();
             _joinList = new List<JoinClause>();
+            _groupByList = new List<GroupByClause>();
             _orderByList = new List<OrderByClause>();
 
             parameterNumber = 0;
@@ -46,6 +48,7 @@ namespace Vip.SqlQuery
                 _fromClause.CompileFrom(),
                 _joinList.CompileJoins(),
                 _whereList.CompileWheres(),
+                _groupByList.CompileGroupBy(),
                 _orderByList.CompileOrderBy()
             };
 

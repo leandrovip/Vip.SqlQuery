@@ -34,6 +34,12 @@ namespace Vip.SqlQuery.Extensions
             return !join.IsNullOrEmpty() ? join : "";
         }
 
+        public static string CompileGroupBy(this List<GroupByClause> list)
+        {
+            var groupBy = string.Join(", ", list.Select(x => x.GroupByCommand));
+            return !groupBy.IsNullOrEmpty() ? $"GROUP BY {groupBy}" : "";
+        }
+
         public static string CompileOrderBy(this List<OrderByClause> list)
         {
             var orderBy = string.Join(", ", list.Select(x => x.OrderByCommand));

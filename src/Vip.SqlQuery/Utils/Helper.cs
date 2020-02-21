@@ -6,7 +6,7 @@ namespace Vip.SqlQuery.Utils
 {
     public class Helper
     {
-        private static readonly List<string> _functions = new List<string> {"COUNT", "AVG", "DISTINCT", "SUM"};
+        private static readonly List<string> _functions = new List<string> {"COUNT", "AVG", "DISTINCT", "SUM", "MAX", "MIN"};
 
         public static string TableName(string table)
         {
