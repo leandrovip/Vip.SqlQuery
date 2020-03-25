@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Vip.SqlQuery</id>
-    <version>1.0.10</version>
+    <version>1.0.11</version>
     <authors>Leandro Ferreira</authors>
     <owners>Leandro Ferreira</owners>
     <projectUrl>https://github.com/leandrovip/Vip.SqlQuery</projectUrl>
@@ -12,6 +12,6 @@
     <tags>sql-builder query sql-server vip querybuilder</tags>
   </metadata>
     <files>
-        <file src="..\src\Vip.SqlQuery\bin\Release\Vip.SqlQuery.dll" target="lib\net462\Vip.SqlQuery.dll"/>
+        <file src="..\src\Vip.SqlQuery\bin\Release\Vip.SqlQuery.dll" target="lib\net48\Vip.SqlQuery.dll"/>
     </files>
 </package>

@@ -191,5 +191,22 @@ namespace Vip.SqlQuery.Tests.Clauses
             // Assert
             Assert.Equal(queryExpected, query.Command);
         }
+
+        [Fact]
+        public void Select_With_Cast_And_column()
+        {
+            // Arrange
+            const string queryExpected = "SELECT CAST(p.Data AS DATE) AS Data, [p].[Produto] FROM [Produtos] [p]";
+
+            // Act
+            var query = SqlQuery.New()
+                .Select("CAST(p.Data as DATE) AS Data")
+                .Select("p.Produto")
+                .From("Produtos p")
+                .Build();
+
+            // Assert
+            Assert.Equal(queryExpected, query.Command);
+        }
     }
 }
