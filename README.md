@@ -1,6 +1,6 @@
 # Vip.SqlQuery
 
-This is a very simple library to generate ***SELECT***  queries in SQL SERVER. Is possible generate queries with many columns, prefix, many possibles where´s clause, parameters and more. :v: :wink:
+This is a very simple library to generate ***SELECT***  queries in SQL SERVER. It is possible generate queries with many columns, prefix, many possibles where´s clause, parameters and more. :v: :wink:
 
 _Package write in C#, framework .Net 4.8_
 
@@ -9,7 +9,7 @@ _Package write in C#, framework .Net 4.8_
 Declare a using:
 
 ```csharp
-using SqlQuery;
+using Vip.SqlQuery;
 ```
 
 Code:
