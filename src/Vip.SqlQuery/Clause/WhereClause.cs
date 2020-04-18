@@ -33,6 +33,11 @@ namespace Vip.SqlQuery.Clause
             CreateCommand(column, value1, value2, parameterNumber);
         }
 
+        public WhereClause(string column, string customWhere)
+        {
+            CreateCommand(column, customWhere);
+        }
+
         private WhereClause()
         {
             Parameter = new List<Parameter>();
@@ -77,6 +82,14 @@ namespace Vip.SqlQuery.Clause
             WhereCondition = $"{columnName} BETWEEN {parameterName1} AND {parameterName2}";
             Parameter.Add(new Parameter {Name = parameterName1, Value = value1});
             Parameter.Add(new Parameter {Name = parameterName2, Value = value2});
+        }
+
+        private void CreateCommand(string column, string customWhere)
+        {
+            var columnName = Helper.ColumnName(column);
+            var custom = customWhere.Trim();
+
+            WhereCondition = $"{columnName} {custom}";
         }
 
         #endregion

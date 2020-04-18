@@ -360,5 +360,74 @@ namespace Vip.SqlQuery.Tests.Clauses
             // Assert
             Assert.Equal(queryExpected, query.Command);
         }
+
+        [Fact]
+        public void Where_With_WhereCustom()
+        {
+            // Arrange
+            const string queryExpected = "SELECT [p].[ProdutoId], [p].[Descricao] " +
+                                         "FROM [Produto] [p] " +
+                                         "WHERE [p].[ProdutoId] IS NOT NULL " +
+                                         "ORDER BY [p].[Descricao]";
+
+            // Act
+            var query = SqlQuery.New()
+                .Select(columnsTest, "p")
+                .From("Produto p")
+                .WhereCustom("p.ProdutoId", "IS NOT NULL")
+                .OrderBy("p.Descricao")
+                .Build();
+
+            // Assert
+            Assert.Equal(queryExpected, query.Command);
+        }
+
+        [Fact]
+        public void Where_With_WhereCustom_With_2_Wheres()
+        {
+            // Arrange
+            const string queryExpected = "SELECT [p].[ProdutoId], [p].[Descricao] " +
+                                         "FROM [Produto] [p] " +
+                                         "WHERE [p].[ProdutoId] IS NOT NULL " +
+                                         "AND [p].[Descricao] = @p0 " +
+                                         "ORDER BY [p].[Descricao]";
+
+            // Act
+            var query = SqlQuery.New()
+                .Select(columnsTest, "p")
+                .From("Produto p")
+                .WhereCustom("p.ProdutoId", "IS NOT NULL")
+                .WhereAnd("p.Descricao", Condition.Equal, "Produto")
+                .OrderBy("p.Descricao")
+                .Build();
+
+            // Assert
+            Assert.Equal(queryExpected, query.Command);
+        }
+
+        [Fact]
+        public void Where_With_WhereCustom_With_3_Wheres()
+        {
+            // Arrange
+            const string queryExpected = "SELECT [p].[ProdutoId], [p].[Descricao] " +
+                                         "FROM [Produto] [p] " +
+                                         "WHERE [p].[ProdutoId] IS NOT NULL " +
+                                         "AND [p].[Descricao] = @p0 " +
+                                         "OR [p].[Descricao] = @p1 " +
+                                         "ORDER BY [p].[Descricao]";
+
+            // Act
+            var query = SqlQuery.New()
+                .Select(columnsTest, "p")
+                .From("Produto p")
+                .WhereCustom("p.ProdutoId", "IS NOT NULL")
+                .WhereAnd("p.Descricao", Condition.Equal, "Produto")
+                .WhereOr("p.Descricao", Condition.Equal, "Produto")
+                .OrderBy("p.Descricao")
+                .Build();
+
+            // Assert
+            Assert.Equal(queryExpected, query.Command);
+        }
     }
 }

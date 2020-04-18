@@ -102,5 +102,15 @@ namespace Vip.SqlQuery
         }
 
         #endregion
+
+        #region WhereCustom
+
+        public SqlQuery WhereCustom(string column, string custom)
+        {
+            _whereList.Add(new WhereClause(column, custom));
+            return this;
+        }
+
+        #endregion
     }
 }

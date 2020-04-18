@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Vip.SqlQuery</id>
-    <version>1.0.11</version>
+    <version>1.0.12</version>
     <authors>Leandro Ferreira</authors>
     <owners>Leandro Ferreira</owners>
     <projectUrl>https://github.com/leandrovip/Vip.SqlQuery</projectUrl>

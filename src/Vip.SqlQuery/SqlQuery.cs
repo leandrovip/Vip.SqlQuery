@@ -2,6 +2,7 @@
 using System.Linq;
 using Vip.SqlQuery.Clause;
 using Vip.SqlQuery.Extensions;
+using Vip.SqlQuery.Utils;
 
 namespace Vip.SqlQuery
 {
@@ -53,7 +54,7 @@ namespace Vip.SqlQuery
             };
 
             var sql = string.Join(" ", results.Where(x => !x.IsNullOrEmpty()));
-            var parameters = _whereList.SelectMany(x => x.Parameter).Distinct().ToArray();
+            var parameters = _whereList.Where(x => x.Parameter != null).SelectMany(x => x.Parameter).Distinct().ToArray();
 
             return new SqlResult {Command = sql, Parameters = parameters};
         }
