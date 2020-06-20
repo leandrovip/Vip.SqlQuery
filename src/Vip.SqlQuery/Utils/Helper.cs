@@ -9,7 +9,7 @@ namespace Vip.SqlQuery.Utils
         private static readonly List<string> _functions = new List<string>
         {
             "COUNT", "AVG", "DISTINCT", "SUM", "MAX", "MIN", "ABS", "ROUND",
-            "CAST", "CONVERT", "PARSE", "GETDATE", "DAY", "MONTH", "YEAR", "ISDATE"
+            "CAST", "CONVERT", "PARSE", "GETDATE", "DAY", "MONTH", "YEAR", "ISDATE", "SELECT"
         };
 
         public static string TableName(string table)
@@ -24,7 +24,7 @@ namespace Vip.SqlQuery.Utils
 
         public static string ColumnName(string column)
         {
-            return _functions.Any(column.Contains) ? BuildFunctions(column) : BuildColumnName(column);
+            return _functions.Any(column.ToUpper().Contains) ? BuildFunctions(column) : BuildColumnName(column);
         }
 
         private static string BuildColumnName(string column)

@@ -208,5 +208,24 @@ namespace Vip.SqlQuery.Tests.Clauses
             // Assert
             Assert.Equal(queryExpected, query.Command);
         }
+
+        [Fact]
+        public void Select_With_SubSelect()
+        {
+            // Arrange
+            const string queryExpected = "SELECT [p].[Codigo], [p].[Descricao], " +
+                                         "(SELECT g.Grupo AS Grupo FROM Grupo g WHERE g.GrupoId = p.GrupoId) AS NomeGrupo " +
+                                         "FROM [Produto] [p]";
+
+            // Act
+            var query = SqlQuery.New()
+                .Select(new[] {"Codigo", "Descricao"}, "p")
+                .Select("(SELECT g.Grupo as Grupo FROM Grupo g WHERE g.GrupoId = p.GrupoId) as NomeGrupo")
+                .From("Produto p")
+                .Build();
+
+            // Assert
+            Assert.Equal(queryExpected, query.Command);
+        }
     }
 }
