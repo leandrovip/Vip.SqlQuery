@@ -1,4 +1,5 @@
-﻿using Vip.SqlQuery.Clause;
+﻿using System.Linq;
+using Vip.SqlQuery.Clause;
 using Vip.SqlQuery.Enums;
 
 namespace Vip.SqlQuery
@@ -9,7 +10,9 @@ namespace Vip.SqlQuery
 
         public SqlQuery Where(string column, Condition condition, object value)
         {
-            _whereList.Add(new WhereClause(column, condition, value, LogicOperator.NULL, parameterNumber));
+            var logicOperator = _whereList.Any() ? LogicOperator.AND : LogicOperator.NULL;
+
+            _whereList.Add(new WhereClause(column, condition, value, logicOperator, parameterNumber));
             parameterNumber++;
             return this;
         }
@@ -18,7 +21,8 @@ namespace Vip.SqlQuery
         {
             if (predicate)
             {
-                _whereList.Add(new WhereClause(column, condition, value, LogicOperator.NULL, parameterNumber));
+                var logicOperator = _whereList.Any() ? LogicOperator.AND : LogicOperator.NULL;
+                _whereList.Add(new WhereClause(column, condition, value, logicOperator, parameterNumber));
                 parameterNumber++;
             }
 

@@ -429,5 +429,25 @@ namespace Vip.SqlQuery.Tests.Clauses
             // Assert
             Assert.Equal(queryExpected, query.Command);
         }
+
+        [Fact]
+        public void Where_Whit_2_Wheres()
+        {
+            // Arrange
+            const string queryExpected = "SELECT [p].[ProdutoId], [p].[Descricao] " +
+                                         "FROM [Produto] [p] " +
+                                         "WHERE [p].[ProdutoId] = @p0 " +
+                                         "AND [p].[Valor] = @p1";
+            // Act
+            var query = SqlQuery.New()
+                .Select(new[] {"ProdutoId", "Descricao"}, "p")
+                .From("Produto p")
+                .Where("p.ProdutoId", Condition.Equal, 1)
+                .Where("p.Valor", Condition.Equal, 1)
+                .Build();
+
+            // Assert
+            Assert.Equal(queryExpected, query.Command);
+        }
     }
 }
