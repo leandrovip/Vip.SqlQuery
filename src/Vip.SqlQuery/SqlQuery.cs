@@ -2,7 +2,6 @@
 using System.Linq;
 using Vip.SqlQuery.Clause;
 using Vip.SqlQuery.Extensions;
-using Vip.SqlQuery.Utils;
 
 namespace Vip.SqlQuery
 {

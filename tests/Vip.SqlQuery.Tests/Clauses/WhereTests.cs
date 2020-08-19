@@ -6,7 +6,7 @@ namespace Vip.SqlQuery.Tests.Clauses
 {
     public class WhereTests
     {
-        private readonly string[] columnsTest = {"ProdutoId", "Descricao"};
+        private readonly string[] columnsTest = { "ProdutoId", "Descricao" };
 
         [Fact]
         public void WhereSimpleTest()
@@ -60,7 +60,7 @@ namespace Vip.SqlQuery.Tests.Clauses
             var query = SqlQuery.New()
                 .Select(columnsTest, "p")
                 .From("Produto p")
-                .Where(new[] {new Where("p.ProdutoId", Condition.Equal, "1")})
+                .Where(new[] { new Where("p.ProdutoId", Condition.Equal, "1") })
                 .Build();
 
             // Assert
@@ -440,7 +440,7 @@ namespace Vip.SqlQuery.Tests.Clauses
                                          "AND [p].[Valor] = @p1";
             // Act
             var query = SqlQuery.New()
-                .Select(new[] {"ProdutoId", "Descricao"}, "p")
+                .Select(new[] { "ProdutoId", "Descricao" }, "p")
                 .From("Produto p")
                 .Where("p.ProdutoId", Condition.Equal, 1)
                 .Where("p.Valor", Condition.Equal, 1)
