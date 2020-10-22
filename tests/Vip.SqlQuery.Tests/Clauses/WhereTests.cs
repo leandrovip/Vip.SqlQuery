@@ -6,7 +6,7 @@ namespace Vip.SqlQuery.Tests.Clauses
 {
     public class WhereTests
     {
-        private readonly string[] columnsTest = { "ProdutoId", "Descricao" };
+        private readonly string[] columnsTest = {"ProdutoId", "Descricao"};
 
         [Fact]
         public void WhereSimpleTest()
@@ -60,7 +60,7 @@ namespace Vip.SqlQuery.Tests.Clauses
             var query = SqlQuery.New()
                 .Select(columnsTest, "p")
                 .From("Produto p")
-                .Where(new[] { new Where("p.ProdutoId", Condition.Equal, "1") })
+                .Where(new[] {new Where("p.ProdutoId", Condition.Equal, "1")})
                 .Build();
 
             // Assert
@@ -440,10 +440,34 @@ namespace Vip.SqlQuery.Tests.Clauses
                                          "AND [p].[Valor] = @p1";
             // Act
             var query = SqlQuery.New()
-                .Select(new[] { "ProdutoId", "Descricao" }, "p")
+                .Select(new[] {"ProdutoId", "Descricao"}, "p")
                 .From("Produto p")
                 .Where("p.ProdutoId", Condition.Equal, 1)
                 .Where("p.Valor", Condition.Equal, 1)
+                .Build();
+
+            // Assert
+            Assert.Equal(queryExpected, query.Command);
+        }
+
+        [Fact]
+        public void Where_Whit_2_Wheres_Multiple()
+        {
+            // Arrange
+            const string queryExpected = "SELECT [p].[ProdutoId], [p].[Descricao] " +
+                                         "FROM [Produto] [p] " +
+                                         "WHERE [p].[ProdutoId] = @p0 " +
+                                         "AND ([p].[Valor] = @p1 AND [p].[Codigo] = @p2)";
+            // Act
+            var query = SqlQuery.New()
+                .Select(new[] {"ProdutoId", "Descricao"}, "p")
+                .From("Produto p")
+                .Where("p.ProdutoId", Condition.Equal, 1)
+                .Where(new[]
+                {
+                    new Where("p.Valor", Condition.Equal, 1),
+                    new Where("p.Codigo", Condition.Equal, 1, LogicOperator.AND)
+                })
                 .Build();
 
             // Assert

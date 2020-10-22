@@ -31,7 +31,8 @@ namespace Vip.SqlQuery
 
         public SqlQuery Where(Where[] multiple)
         {
-            _whereList.Add(new WhereClause(multiple, LogicOperator.NULL, parameterNumber));
+            var logicOperator = _whereList.Any() ? LogicOperator.AND : LogicOperator.NULL;
+            _whereList.Add(new WhereClause(multiple, logicOperator, parameterNumber));
             parameterNumber += multiple.Length;
             return this;
         }
