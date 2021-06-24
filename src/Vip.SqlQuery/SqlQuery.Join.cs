@@ -26,5 +26,27 @@ namespace Vip.SqlQuery
         }
 
         #endregion
+
+        #region Join Clause Custom
+
+        public SqlQuery InnerJoin(string custom)
+        {
+            _joinList.Add(new JoinClause(JoinType.InnerJoin, custom));
+            return this;
+        }
+
+        public SqlQuery LeftJoin(string custom)
+        {
+            _joinList.Add(new JoinClause(JoinType.LeftJoin, custom));
+            return this;
+        }
+
+        public SqlQuery RightJoin(string custom)
+        {
+            _joinList.Add(new JoinClause(JoinType.RightJoin, custom));
+            return this;
+        }
+
+        #endregion
     }
 }

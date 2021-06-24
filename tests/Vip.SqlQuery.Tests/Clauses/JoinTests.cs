@@ -67,5 +67,47 @@ namespace Vip.SqlQuery.Tests.Clauses
             // Assert
             Assert.Equal(queryExpected, query.Command);
         }
+
+        [Fact]
+        public void Join_Custom_With_InnerJoin()
+        {
+            // Arrange
+            const string queryExpected = "SELECT * " +
+                                         "FROM [Produto] [p] " +
+                                         "INNER JOIN (SELECT TOP 1 * FROM GRUPO) g ON g.GrupoId = p.GrupoId";
+            
+            // Act
+            var query = SqlQuery.New()
+                .Select()
+                .From("Produto p")
+                .InnerJoin("(SELECT TOP 1 * FROM GRUPO) g ON g.GrupoId = p.GrupoId")
+                .Build();
+
+            // Assert
+            Assert.Equal(queryExpected, query.Command);
+        }
+
+        [Fact]
+        public void Join_Custom_With_InnerJoin_LeftJoin_RigthJoin()
+        {
+            // Arrange
+            const string queryExpected = "SELECT * " +
+                                         "FROM [Produto] [p] " +
+                                         "INNER JOIN (SELECT TOP 1 * FROM Grupo) g ON g.GrupoId = p.GrupoId " +
+                                         "LEFT JOIN (SELECT TOP 1 * FROM Marca) m ON m.MarcaId = p.MarcaId " +
+                                         "RIGHT JOIN (SELECT TOP 1 * FROM Tipo) t ON t.TipoId = p.TipoId";
+
+            // Act
+            var query = SqlQuery.New()
+                .Select()
+                .From("Produto p")
+                .InnerJoin("(SELECT TOP 1 * FROM Grupo) g ON g.GrupoId = p.GrupoId")
+                .LeftJoin("(SELECT TOP 1 * FROM Marca) m ON m.MarcaId = p.MarcaId")
+                .RightJoin("(SELECT TOP 1 * FROM Tipo) t ON t.TipoId = p.TipoId")
+                .Build();
+
+            // Assert
+            Assert.Equal(queryExpected, query.Command);
+        }
     }
 }

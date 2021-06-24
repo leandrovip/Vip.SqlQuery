@@ -9,7 +9,7 @@ namespace Vip.SqlQuery.Utils
         private static readonly List<string> _functions = new List<string>
         {
             "COUNT", "AVG", "DISTINCT", "SUM", "MAX", "MIN", "ABS", "ROUND",
-            "CAST", "CONVERT", "PARSE", "GETDATE", "DAY", "MONTH", "YEAR", "ISDATE", "SELECT"
+            "CAST", "CONVERT", "PARSE", "GETDATE", "DAY", "MONTH", "YEAR", "ISDATE", "SELECT", "ISNULL"
         };
 
         public static string TableName(string table)

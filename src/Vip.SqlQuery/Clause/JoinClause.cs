@@ -19,6 +19,11 @@ namespace Vip.SqlQuery.Clause
             CreateCommand(type, table, first, condition, second);
         }
 
+        public JoinClause(JoinType type, string custom)
+        {
+            CreateCommand(type, custom);
+        }
+
         #endregion
 
         #region Methods
@@ -31,6 +36,11 @@ namespace Vip.SqlQuery.Clause
             var secondName = Helper.ColumnName(second);
 
             JoinCommand = $"{typeName} {tableName} ON {firstName} {condition.GetDescription()} {secondName}";
+        }
+
+        private void CreateCommand(JoinType type, string custom)
+        {
+            JoinCommand = $"{type.GetDescription()} {custom.Trim()}";
         }
 
         #endregion
