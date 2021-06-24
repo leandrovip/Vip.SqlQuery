@@ -1,6 +1,6 @@
 # Vip.SqlQuery
 
-[![Build](https://github.com/leandrovip/Vip.SqlQuery/actions/workflows/nuget.yml/badge.svg?branch=master)](https://github.com/leandrovip/Vip.SqlQuery/actions/workflows/nuget.yml)
+[![License](https://img.shields.io/github/license/leandrovip/Vip.SqlQuery)](https://raw.githubusercontent.com/leandrovip/Vip.SqlQuery/master/LICENSE)
 [![NuGet](https://img.shields.io/nuget/v/Vip.SqlQuery)](https://www.nuget.org/packages/Vip.SqlQuery) 
 [![NuGet Downloads](https://img.shields.io/nuget/dt/Vip.SqlQuery.svg)](https://www.nuget.org/packages/Vip.SqlQuery) 
 
