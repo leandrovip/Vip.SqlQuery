@@ -1,8 +1,18 @@
 # Vip.SqlQuery
 
+[![Build](https://github.com/leandrovip/Vip.SqlQuery/actions/workflows/nuget.yml/badge.svg?branch=master)](https://github.com/leandrovip/Vip.SqlQuery/actions/workflows/nuget.yml)
+[![NuGet](https://img.shields.io/nuget/v/Vip.SqlQuery)](https://www.nuget.org/packages/Vip.SqlQuery) 
+[![NuGet Downloads](https://img.shields.io/nuget/dt/Vip.SqlQuery.svg)](https://www.nuget.org/packages/Vip.SqlQuery) 
+
+<br />
+
 This is a very simple library to generate ***SELECT***  queries in SQL SERVER. It is possible generate queries with many columns, prefix, many possibles where´s clause, parameters and more. :v: :wink:
 
-_Package write in C#, framework .Net 4.8_
+## Requirements
+
+```
+.Net Standard 2.0
+```
 
 ## How to use ?
 
@@ -34,5 +44,5 @@ ORDER BY [p].[ProdutoId]
 */
 ```
 
-# License
+## License
 MIT
