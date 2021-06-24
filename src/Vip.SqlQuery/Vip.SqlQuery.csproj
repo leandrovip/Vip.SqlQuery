@@ -1,68 +1,17 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-  <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{57E679ED-6FA6-4D27-9735-0109BBE56EB2}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Vip.SqlQuery</RootNamespace>
-    <AssemblyName>Vip.SqlQuery</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Clause\FromClause.cs" />
-    <Compile Include="Clause\GroupByClause.cs" />
-    <Compile Include="Clause\JoinClause.cs" />
-    <Compile Include="Clause\LimitClause.cs" />
-    <Compile Include="Clause\OrderByClause.cs" />
-    <Compile Include="Extensions\CompileExtensions.cs" />
-    <Compile Include="SqlQuery.From.cs" />
-    <Compile Include="SqlQuery.GroupBy.cs" />
-    <Compile Include="SqlQuery.Join.cs" />
-    <Compile Include="SqlQuery.OrderBy.cs" />
-    <Compile Include="SqlQuery.Select.cs" />
-    <Compile Include="SqlQuery.Where.cs" />
-    <Compile Include="Utils\Helper.cs" />
-    <Compile Include="Enums\JoinType.cs" />
-    <Compile Include="Enums\LogicOperator.cs" />
-    <Compile Include="Clause\SelectClause.cs" />
-    <Compile Include="Clause\WhereClause.cs" />
-    <Compile Include="Extensions\Extensions.cs" />
-    <Compile Include="Enums\Condition.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Enums\Sorting.cs" />
-    <Compile Include="SqlResult.cs" />
-    <Compile Include="SqlQuery.cs" />
-    <Compile Include="Utils\Parameter.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="SqlQuery.Limit.cs" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<LangVersion>latest</LangVersion>
+		<Authors>Leandro Ferreira</Authors>
+		<Company>VIP Soluções</Company>
+		<Description>Simple library for generate sql queries to MS SQL SERVER</Description>
+		<Copyright>VIP Soluções</Copyright>
+		<Version>1.0.16</Version>
+		<PackageTags>sql;querybuilder;sql-server</PackageTags>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+		<RepositoryUrl>https://github.com/leandrovip/Vip.SqlQuery</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/leandrovip/Vip.SqlQuery</PackageProjectUrl>
+
+	</PropertyGroup>
 </Project>
