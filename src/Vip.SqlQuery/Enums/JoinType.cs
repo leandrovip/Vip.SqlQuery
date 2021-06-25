@@ -6,6 +6,8 @@ namespace Vip.SqlQuery.Enums
     {
         [Description("INNER JOIN")] InnerJoin,
         [Description("LEFT JOIN")] LeftJoin,
-        [Description("RIGHT JOIN")] RightJoin
+        [Description("RIGHT JOIN")] RightJoin,
+        [Description("CROSS APPLY")] CrossApply,
+        [Description("OUTER APPLY")] OuterApply,
     }
 }

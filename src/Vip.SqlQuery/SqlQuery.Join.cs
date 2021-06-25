@@ -47,6 +47,18 @@ namespace Vip.SqlQuery
             return this;
         }
 
+        public SqlQuery CrossApply(string custom)
+        {
+            _joinList.Add(new JoinClause(JoinType.CrossApply, custom));
+            return this;
+        }
+
+        public SqlQuery OuterApply(string custom)
+        {
+            _joinList.Add(new JoinClause(JoinType.OuterApply, custom));
+            return this;
+        }
+
         #endregion
     }
 }
