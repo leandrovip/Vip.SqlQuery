@@ -116,6 +116,13 @@ namespace Vip.SqlQuery
             return this;
         }
 
+        public SqlQuery WhereCustom(bool predicate, string column, string custom)
+        {
+            if (predicate)
+                WhereCustom(column, custom);
+            return this;
+        }
+
         #endregion
     }
 }

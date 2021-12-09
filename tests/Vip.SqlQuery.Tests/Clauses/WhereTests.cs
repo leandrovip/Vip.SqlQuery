@@ -431,6 +431,47 @@ namespace Vip.SqlQuery.Tests.Clauses
         }
 
         [Fact]
+        public void Where_With_CustomPredicate()
+        {
+            // Arrange
+            const string queryExpected = "SELECT [p].[ProdutoId], [p].[Descricao] " +
+                                         "FROM [Produto] [p] " +
+                                         "WHERE [p].[ProdutoId] IS NOT NULL " +
+                                         "ORDER BY [p].[Descricao]";
+
+            // Act
+            var query = SqlQuery.New()
+                .Select(columnsTest, "p")
+                .From("Produto p")
+                .WhereCustom(true, "p.ProdutoId", "IS NOT NULL")
+                .OrderBy("p.Descricao")
+                .Build();
+
+            // Assert
+            Assert.Equal(queryExpected, query.Command);
+        }
+
+        [Fact]
+        public void Where_With_CustomPredicateFalse()
+        {
+            // Arrange
+            const string queryExpected = "SELECT [p].[ProdutoId], [p].[Descricao] " +
+                                         "FROM [Produto] [p] " +
+                                         "ORDER BY [p].[Descricao]";
+
+            // Act
+            var query = SqlQuery.New()
+                .Select(columnsTest, "p")
+                .From("Produto p")
+                .WhereCustom(false, "p.ProdutoId", "IS NOT NULL")
+                .OrderBy("p.Descricao")
+                .Build();
+
+            // Assert
+            Assert.Equal(queryExpected, query.Command);
+        }
+
+        [Fact]
         public void Where_Whit_2_Wheres()
         {
             // Arrange
