@@ -176,6 +176,23 @@ namespace Vip.SqlQuery.Tests.Clauses
         }
 
         [Fact]
+        public void Select_With_DatePart()
+        {
+            // Arrange
+            const string queryExpected = "SELECT DATEPART(hour, p.Codigo) FROM [Produtos] [p] GROUP BY DATEPART(hour, p.Codigo)";
+
+            // Act
+            var query = SqlQuery.New()
+                .Select("DATEPART(hour, p.Codigo)")
+                .From("Produtos p")
+                .GroupBy("DATEPART(hour, p.Codigo)")
+                .Build();
+
+            // Assert
+            Assert.Equal(queryExpected, query.Command);
+        }
+
+        [Fact]
         public void Select_With_Count_And_Column()
         {
             // Arrange
