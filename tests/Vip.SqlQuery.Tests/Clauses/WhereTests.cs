@@ -262,6 +262,26 @@ namespace Vip.SqlQuery.Tests.Clauses
         }
 
         [Fact]
+        public void Where_With_WhereAnd_Custom()
+        {
+            // Arrange
+            const string queryExpected = "SELECT [p].[ProdutoId] " +
+                                         "FROM [Produto] [p] " +
+                                         "WHERE [p].[ProdutoId] = @p0 AND [p].[Descricao] = (SELECT MAX(id) FROM Produto p1 WHERE p1.Id2 = p.Id2)";
+
+            // Act
+            var query = SqlQuery.New()
+                .Select("p.ProdutoId")
+                .From("Produto p")
+                .Where("p.ProdutoId", Condition.Equal, 1)
+                .WhereAnd("p.Descricao", "= (SELECT MAX(id) FROM Produto p1 WHERE p1.Id2 = p.Id2)")
+                .Build();
+
+            // Assert
+            Assert.Equal(queryExpected, query.Command);
+        }
+
+        [Fact]
         public void Where_With_WhereOr_Condition_true()
         {
             // Arrange
@@ -295,6 +315,26 @@ namespace Vip.SqlQuery.Tests.Clauses
                 .From("Produto p")
                 .Where("p.ProdutoId", Condition.Equal, 1)
                 .WhereOr(false, "p.Descricao", Condition.Like, "Descricao")
+                .Build();
+
+            // Assert
+            Assert.Equal(queryExpected, query.Command);
+        }
+
+        [Fact]
+        public void Where_With_WhereOr_Custom()
+        {
+            // Arrange
+            const string queryExpected = "SELECT [p].[ProdutoId] " +
+                                         "FROM [Produto] [p] " +
+                                         "WHERE [p].[ProdutoId] = @p0 OR [p].[Descricao] = (SELECT MAX(id) FROM Produto p1 WHERE p1.Id2 = p.Id2)";
+
+            // Act
+            var query = SqlQuery.New()
+                .Select("p.ProdutoId")
+                .From("Produto p")
+                .Where("p.ProdutoId", Condition.Equal, 1)
+                .WhereOr("p.Descricao", "= (SELECT MAX(id) FROM Produto p1 WHERE p1.Id2 = p.Id2)")
                 .Build();
 
             // Assert

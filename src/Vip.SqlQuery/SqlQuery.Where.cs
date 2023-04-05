@@ -59,6 +59,12 @@ namespace Vip.SqlQuery
             return this;
         }
 
+        public SqlQuery WhereAnd(string column, string custom)
+        {
+            _whereList.Add(new WhereClause(column, custom, LogicOperator.AND));
+            return this;
+        }
+
         public SqlQuery WhereAnd(Where[] multiple)
         {
             _whereList.Add(new WhereClause(multiple, LogicOperator.AND, parameterNumber));
@@ -85,6 +91,12 @@ namespace Vip.SqlQuery
                 parameterNumber++;
             }
 
+            return this;
+        }
+
+        public SqlQuery WhereOr(string column, string custom)
+        {
+            _whereList.Add(new WhereClause(column, custom, LogicOperator.OR));
             return this;
         }
 

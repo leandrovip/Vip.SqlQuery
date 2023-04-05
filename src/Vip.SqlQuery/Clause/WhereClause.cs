@@ -32,10 +32,10 @@ namespace Vip.SqlQuery.Clause
         {
             CreateCommand(column, value1, value2, parameterNumber);
         }
-
-        public WhereClause(string column, string customWhere)
+        
+        public WhereClause(string column, string customWhere, LogicOperator logicOperator = LogicOperator.NULL)
         {
-            CreateCommand(column, customWhere);
+            CreateCommand(column, customWhere, logicOperator);
         }
 
         private WhereClause()
@@ -84,12 +84,13 @@ namespace Vip.SqlQuery.Clause
             Parameter.Add(new Parameter {Name = parameterName2, Value = value2});
         }
 
-        private void CreateCommand(string column, string customWhere)
+        private void CreateCommand(string column, string customWhere, LogicOperator logicOperator)
         {
             var columnName = Helper.ColumnName(column);
+            var logic = logicOperator == LogicOperator.NULL ? "" : logicOperator.GetDescription() + " ";
             var custom = customWhere.Trim();
 
-            WhereCondition = $"{columnName} {custom}";
+            WhereCondition = $"{logic}{columnName} {custom}";
         }
 
         #endregion
