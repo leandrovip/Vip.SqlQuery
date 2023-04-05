@@ -36,7 +36,7 @@ jobs:
       - name: "Setup .NET Core"
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: "5.0.x"
+          dotnet-version: "7.0.x"
 
       - name: Build Project
         run: dotnet build ./src/Vip.SqlQuery.sln --configuration Release -p:Version=$VERSION_PROJECT
