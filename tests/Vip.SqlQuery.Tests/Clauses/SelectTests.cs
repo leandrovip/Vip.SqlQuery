@@ -227,6 +227,23 @@ namespace Vip.SqlQuery.Tests.Clauses
         }
 
         [Fact]
+        public void Select_With_CUSTOM()
+        {
+            // Arrange
+            const string queryExpected = "SELECT TOP 1 v.ProdutoId AS Retorno, [p].[Produto] FROM [Produtos] [p]";
+
+            // Act
+            var query = SqlQuery.New()
+                .Select("TOP 1 v.ProdutoId as Retorno")
+                .Select("p.Produto")
+                .From("Produtos p")
+                .Build();
+
+            // Assert
+            Assert.Equal(queryExpected, query.Command);
+        }
+
+        [Fact]
         public void Select_With_SubSelect()
         {
             // Arrange
